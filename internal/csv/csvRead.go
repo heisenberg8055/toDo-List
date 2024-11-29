@@ -5,7 +5,7 @@ import "github.com/gocarina/gocsv"
 func ReadCsv() []*task {
 
 	tasks := []*task{}
-	taskFile, err := LoadFile("./internal/csv/assets/tasks.csv")
+	taskFile, err := LoadFile("./assets/tasks.csv")
 	defer CloseFile(taskFile)
 
 	if err != nil {

@@ -1,9 +1,9 @@
 package main
 
 import (
-	csvUtil "github.com/heisenberg8055/toDo-List/internal/csv"
+	cliUtil "github.com/heisenberg8055/toDo-List/internal/cobra-cli"
 )
 
 func main() {
-	csvUtil.DeleteTask("2")
+	cliUtil.Execute()
 }

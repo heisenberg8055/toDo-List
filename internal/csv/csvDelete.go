@@ -5,17 +5,14 @@ func DeleteTask(id string) bool {
 
 	updatedTasks := []*task{}
 
-	change := false
-
 	for _, task := range tasks {
 		if task.Id != id {
 			updatedTasks = append(updatedTasks, task)
-			change = true
 		}
 	}
 
 	WriteCsv(updatedTasks)
 
-	return change
+	return len(updatedTasks) != len(tasks)
 
 }

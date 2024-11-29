@@ -15,11 +15,11 @@ type task struct {
 
 func WriteCsv(tasks []*task) {
 
-	if err := os.Truncate("./internal/csv/assets/tasks.csv", 0); err != nil {
+	if err := os.Truncate("./assets/tasks.csv", 0); err != nil {
 		panic(err)
 	}
 
-	taskFile, err := LoadFile("./internal/csv/assets/tasks.csv")
+	taskFile, err := LoadFile("./assets/tasks.csv")
 	defer CloseFile(taskFile)
 
 	if err != nil {
