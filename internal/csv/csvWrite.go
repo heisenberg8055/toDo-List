@@ -1,0 +1,33 @@
+package csv
+
+import (
+	"os"
+
+	"github.com/gocarina/gocsv"
+)
+
+type task struct {
+	Id          string `csv:"ID"`
+	Description string `csv:"Description"`
+	CreatedAt   string `csv:"CreatedAt"`
+	IsComplete  bool   `csv:"IsComplete"`
+}
+
+func WriteCsv(tasks []*task) {
+
+	if err := os.Truncate("./internal/csv/assets/tasks.csv", 0); err != nil {
+		panic(err)
+	}
+
+	taskFile, err := LoadFile("./internal/csv/assets/tasks.csv")
+	defer CloseFile(taskFile)
+
+	if err != nil {
+		panic(err)
+	}
+	err = gocsv.MarshalFile(&tasks, taskFile)
+
+	if err != nil {
+		panic(err)
+	}
+}
