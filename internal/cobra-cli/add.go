@@ -3,7 +3,7 @@ package cobra_cli
 import (
 	"fmt"
 
-	csvUtil "github.com/heisenberg8055/toDo-List/internal/csv"
+	sqlite_server "github.com/heisenberg8055/toDo-List/internal/sqlite-server"
 	"github.com/spf13/cobra"
 )
 
@@ -16,8 +16,13 @@ var addCmd = &cobra.Command{
 	Example:    "tasks add <description>",
 	Args:       cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		addId := csvUtil.AddCsv(args[0])
-		fmt.Printf("Task Added To Your To-Do List with ID: %s\n", addId)
+		chk, err := sqlite_server.AddTask(args[0])
+		if err != nil {
+			panic(err)
+		}
+		if chk != 0 {
+			fmt.Printf("Task Added To Your To-Do List with ID:%d\n", chk)
+		}
 	},
 }
 
