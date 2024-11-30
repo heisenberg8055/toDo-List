@@ -6,7 +6,7 @@ import (
 	timeUtil "github.com/heisenberg8055/toDo-List/internal/timediff"
 )
 
-func AddCsv(addDescription string) {
+func AddCsv(addDescription string) string {
 
 	tasks := ReadCsv()
 
@@ -15,7 +15,7 @@ func AddCsv(addDescription string) {
 	if len(tasks) == 0 {
 		tasks = append(tasks, &task{Id: "1", Description: addDescription, CreatedAt: addCreatedAt, IsComplete: false})
 		WriteCsv(tasks)
-		return
+		return "1"
 	} else {
 		lastId, err := strconv.Atoi(tasks[len(tasks)-1].Id)
 		if err != nil {
@@ -25,7 +25,7 @@ func AddCsv(addDescription string) {
 		addId := strconv.Itoa(lastId)
 		tasks = append(tasks, &task{Id: addId, Description: addDescription, CreatedAt: addCreatedAt, IsComplete: false})
 		WriteCsv(tasks)
-		return
+		return addId
 	}
 
 }

@@ -1,18 +1,17 @@
 package csv
 
-func ListCsv(flag string) []*task {
+func ListCsv(showAll bool) {
 
 	tasks := ReadCsv()
-	if flag == "" {
+	if !showAll {
 		notCompletedTasks := []*task{}
 		for _, task := range tasks {
 			if !task.IsComplete {
 				notCompletedTasks = append(notCompletedTasks, task)
 			}
 		}
-		return notCompletedTasks
+		StdOut(notCompletedTasks)
 	} else {
-		return tasks
+		StdOut(tasks)
 	}
-
 }

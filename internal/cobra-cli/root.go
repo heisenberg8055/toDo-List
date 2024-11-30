@@ -9,8 +9,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "tasks",
-	Short: "a cli To-Do list",
-	Long:  "Manage your To-Do List in your own Cli",
+	Short: "A cli application for managing tasks in the terminal.",
+	Long:  "A cli application for managing tasks in the terminal. Should be able to perform crud operations via a cli on a data file of tasks. The operations should be as follows: [add, list, complete, delete]",
 	Run: func(cmd *cobra.Command, args []string) {
 
 	},

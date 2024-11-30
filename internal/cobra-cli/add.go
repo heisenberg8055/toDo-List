@@ -8,14 +8,16 @@ import (
 )
 
 var addCmd = &cobra.Command{
-	Use:     "add",
-	Aliases: []string{"addition", "insert"},
-	Short:   "adds an task to your To-Do List",
-	Long:    "Adds a task to your To-Do List along with time and checklist",
-	Args:    cobra.ExactArgs(1),
+	Use:        "add",
+	Aliases:    []string{"addition", "insert"},
+	SuggestFor: []string{"ass", "ad"},
+	Short:      "adds an task to your To-Do List",
+	Long:       "The add method should be used to create new tasks in the underlying data store. It should take a positional argument with the task description",
+	Example:    "tasks add <description>",
+	Args:       cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		csvUtil.AddCsv(args[0])
-		fmt.Printf("Task Added To Your To-Do List")
+		addId := csvUtil.AddCsv(args[0])
+		fmt.Printf("Task Added To Your To-Do List with ID: %s\n", addId)
 	},
 }
 
