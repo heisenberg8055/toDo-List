@@ -1,10 +1,18 @@
 package csv
 
-import "github.com/gocarina/gocsv"
+import (
+	"errors"
+	"os"
+
+	"github.com/gocarina/gocsv"
+)
 
 func ReadCsv() []*task {
 
 	tasks := []*task{}
+	if _, err := os.Stat("./assets/tasks.csv"); errors.Is(err, os.ErrNotExist) {
+		return tasks
+	}
 	taskFile, err := LoadFile("./assets/tasks.csv")
 	defer CloseFile(taskFile)
 
