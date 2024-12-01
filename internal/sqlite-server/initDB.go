@@ -1,10 +1,11 @@
 package sqlite_server
 
 import (
-	"context"
 	"database/sql"
 	"errors"
 	"os"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var db *sql.DB
@@ -16,13 +17,12 @@ func InitDatabase(dbPath string) (*sql.DB, error) {
 		return nil, err
 	}
 	if _, err := os.Stat(dbPath); errors.Is(err, os.ErrNotExist) {
-		_, err = db.ExecContext(
-			context.Background(),
+		_, err = db.Exec(
 			`CREATE TABLE IF NOT EXISTS tasks (
 				id INTEGER PRIMARY KEY AUTOINCREMENT, 
 				description TEXT NOT NULL, 
 				createdAt TEXT NOT NULL, 
-				isComplet BOOLEAN NOT NULL
+				isComplete BOOLEAN NOT NULL
 			)`,
 		)
 		if err != nil {

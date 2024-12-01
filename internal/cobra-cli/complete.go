@@ -3,7 +3,7 @@ package cobra_cli
 import (
 	"fmt"
 
-	csvUtil "github.com/heisenberg8055/toDo-List/internal/csv"
+	sqliteUtil "github.com/heisenberg8055/toDo-List/internal/sqlite-server"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +16,7 @@ var completeCmd = &cobra.Command{
 	Args:       cobra.ExactArgs(1),
 	Example:    "tasks complete <taskid>",
 	Run: func(cmd *cobra.Command, args []string) {
-		chk := csvUtil.CompleteTask(args[0])
+		chk := sqliteUtil.CompleteTask(args[0])
 		if chk {
 			fmt.Printf("Status Flipped for ID: %s\n", args[0])
 		} else {

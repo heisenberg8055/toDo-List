@@ -1,7 +1,7 @@
 package cobra_cli
 
 import (
-	csvUtil "github.com/heisenberg8055/toDo-List/internal/csv"
+	sqlUtil "github.com/heisenberg8055/toDo-List/internal/sqlite-server"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,7 @@ var listCmd = &cobra.Command{
 	Long:       "Return a list of all of the uncompleted tasks, with the option to return all tasks regardless of whether or not they are completed.",
 	Example:    "tasks list <optional> (-a or --all)",
 	Run: func(cmd *cobra.Command, args []string) {
-		csvUtil.ListCsv(showAll)
+		sqlUtil.ListTask(showAll)
 	},
 }
 

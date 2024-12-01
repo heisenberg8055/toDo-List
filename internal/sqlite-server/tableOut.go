@@ -1,4 +1,4 @@
-package csv
+package sqlite_server
 
 import (
 	"os"
@@ -8,7 +8,7 @@ import (
 	"github.com/jedib0t/go-pretty/v6/text"
 )
 
-func StdOut(tasks []*task) {
+func StdOut(tasks []task) {
 	t := table.NewWriter()
 	t.SetStyle(table.StyleColoredBlueWhiteOnBlack)
 	t.SetOutputMirror(os.Stdout)

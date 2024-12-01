@@ -3,7 +3,7 @@ package cobra_cli
 import (
 	"fmt"
 
-	csvUtil "github.com/heisenberg8055/toDo-List/internal/csv"
+	sqlite "github.com/heisenberg8055/toDo-List/internal/sqlite-server"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ var deleteCmd = &cobra.Command{
 	Args:       cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		chk := csvUtil.DeleteTask(args[0])
+		chk := sqlite.DeleteTask(args[0])
 		if chk {
 			fmt.Printf("Removed record with ID: %s\n", args[0])
 		} else {

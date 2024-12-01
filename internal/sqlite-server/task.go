@@ -2,7 +2,6 @@ package sqlite_server
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 )
 
@@ -14,8 +13,10 @@ type task struct {
 }
 
 func AddTaskToDb(db *sql.DB, newTask task) (int64, error) {
-	fmt.Println(newTask.Description)
-	stmt, _ := db.Prepare("INSERT INTO TASKS (id, description, createdAt, isComplete) VALUES (?, ?, ?, ?)")
+	stmt, err := db.Prepare("INSERT INTO TASKS (id, description, createdAt, isComplete) VALUES (?, ?, ?, ?)")
+	if err != nil {
+		panic(err)
+	}
 	res, _ := stmt.Exec(nil, newTask.Description, newTask.CreatedAt, newTask.IsComplete)
 	defer stmt.Close()
 	return res.LastInsertId()
@@ -54,7 +55,7 @@ func GetTaskById(db *sql.DB, taskID string) task {
 	return currTask
 }
 
-func CompleteTask(db *sql.DB, taskID string) bool {
+func UpdateTaskInDB(db *sql.DB, taskID string) bool {
 
 	currTask := GetTaskById(db, taskID)
 
@@ -85,7 +86,7 @@ func CompleteTask(db *sql.DB, taskID string) bool {
 	return affected != 0
 }
 
-func DeleteTask(db *sql.DB, taskID string) bool {
+func DeleteTaskInDB(db *sql.DB, taskID string) bool {
 
 	currTask := GetTaskById(db, taskID)
 
